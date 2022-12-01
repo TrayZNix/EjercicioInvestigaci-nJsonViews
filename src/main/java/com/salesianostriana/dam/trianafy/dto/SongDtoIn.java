@@ -8,9 +8,12 @@ import javax.validation.constraints.NotNull;
 /**
   Esta clase se usará para registrar una canción.
  */
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
+@Getter
+@Setter
 @Builder
 public class SongDtoIn {
     @NotNull

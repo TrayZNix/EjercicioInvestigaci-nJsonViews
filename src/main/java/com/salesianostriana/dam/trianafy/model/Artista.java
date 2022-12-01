@@ -2,10 +2,7 @@ package com.salesianostriana.dam.trianafy.model;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +11,9 @@ import javax.persistence.Id;
 
 @Entity
 @NoArgsConstructor @AllArgsConstructor
-@Data
+@RequiredArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Artista {
     @JsonView(Views.Public.class)

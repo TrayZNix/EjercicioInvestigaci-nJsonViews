@@ -1,9 +1,6 @@
 package com.salesianostriana.dam.trianafy.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +9,9 @@ import javax.validation.constraints.NotNull;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@RequiredArgsConstructor
+@Getter
+@Setter
 @Builder
 public class PlaylistDtoIn {
     @NotNull

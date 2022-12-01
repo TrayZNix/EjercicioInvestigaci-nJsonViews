@@ -1,15 +1,15 @@
 package com.salesianostriana.dam.trianafy.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 /**
  Esta clase se usará para devolver la canción con el artista como objeto, y no como un String del nombre del artista.
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@RequiredArgsConstructor
+@Getter
+@Setter
 @Builder
 public class SongDtoModifiedArtist {
 
