@@ -1,9 +1,11 @@
 package com.salesianostriana.dam.trianafy.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.trianafy.dto.ArtistaDtoIn;
 import com.salesianostriana.dam.trianafy.mappers.ArtistaMapper;
 import com.salesianostriana.dam.trianafy.model.Artista;
 import com.salesianostriana.dam.trianafy.model.Song;
+import com.salesianostriana.dam.trianafy.model.Views;
 import com.salesianostriana.dam.trianafy.repos.ArtistRepository;
 import com.salesianostriana.dam.trianafy.repos.SongRepository;
 import com.salesianostriana.dam.trianafy.service.ArtistService;
@@ -45,7 +47,7 @@ public class ArtistaController {
             @ApiResponse(responseCode = "200",
                     description = "Se encontró uno o más artistas",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Artista.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = Views.Public.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             [
@@ -59,6 +61,7 @@ public class ArtistaController {
                     content = {@Content})
     })
     @GetMapping()
+    @JsonView(Views.Public.class)
     public ResponseEntity<List<Artista>> getAllArtistas(){
         List<Artista> artistas = serviceArtista.findAll();
         if (artistas.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -80,7 +83,28 @@ public class ArtistaController {
                     content = {@Content})
     })
     @GetMapping("/{idArtista}")
+    @JsonView(Views.Public.class)
     public ResponseEntity<Artista> getArtista(@Parameter(description = "Id del artista a buscar") @PathVariable Long idArtista){
+        return ResponseEntity.of(serviceArtista.findById(idArtista));
+    }
+    @Operation(summary = "Devuelve una artistas y su información confidencial según su id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se encontró el artista",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Views.ArtistaDtoConfidencial.class),
+                            examples = {@ExampleObject(
+                                    value = """    
+                                                {"id": 1, "nombre": "Kaze", "dni": "123456781", "telefono": "667859768"}
+                                            """
+                            )})}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado un artista con el id proporcionado",
+                    content = {@Content})
+    })
+    @GetMapping("/secure/{idArtista}")
+    @JsonView(Views.ArtistaDtoConfidencial.class)
+    public ResponseEntity<Artista> getArtistaConfidencial(@Parameter(description = "Id del artista a buscar") @PathVariable Long idArtista){
         return ResponseEntity.of(serviceArtista.findById(idArtista));
     }
     @Operation(summary = "Crea un artista nuevo segun el cuerpo proporcionado")

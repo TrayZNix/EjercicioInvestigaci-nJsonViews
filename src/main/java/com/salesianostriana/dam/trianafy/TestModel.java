@@ -25,22 +25,32 @@ public class TestModel {
 
         Artista a1 = Artista.builder()
                 .name("Joaquín Sabina")
+                .dni("94622139R")
+                .telefono("654252024")
                 .build();
 
         Artista a2 = Artista.builder()
                 .name("Dua Lipa")
+                .dni("31910996Z")
+                .telefono("677529251")
                 .build();
 
         Artista a3 = Artista.builder()
                 .name("Metallica")
+                .dni("10793336B")
+                .telefono("655643919")
                 .build();
 
         Artista a4 = Artista.builder()
                 .name("Rels B")
+                .dni("69241740X")
+                .telefono("113611018")
                 .build();
 
         Artista a5 = Artista.builder()
                 .name("Toteking")
+                .dni("94139771N")
+                .telefono("726735111")
                 .build();
 
         List<Artista> artistaList = List.of(a1, a2, a3, a4, a5);
